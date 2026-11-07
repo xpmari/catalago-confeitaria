@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Sucre | Confeitaria Artesanal</title>
+  <meta name="description" content="Bolos festivos, bento cakes e caixas presente com ingredientes belgas. Monte seu pedido e envie pelo WhatsApp.">
+  <meta name="theme-color" content="#6E3B3B">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Maison Sucre | Confeitaria Artesanal">
+  <meta property="og:description" content="Bolos festivos, bento cakes e caixas presente. Monte seu pedido e envie pelo WhatsApp.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1200&q=80">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍰</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FDFBF9; --card: #FFFFFF; --primary: #6E3B3B; --primary-light: #F7EFEF;
+      --text: #2C2220; --muted: #5E504D; --line: rgba(110,59,59,.15);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #1E1716; --card: #2A2120; --primary: #D9A5A0; --primary-light: #3A2B2A;
+        --text: #F3E9E6; --muted: #CDBDB9; --line: rgba(217,165,160,.25);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 90px; }
+    :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .header { background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%); text-align: center; padding: 18px 20px 12px; }
+    .logo { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid var(--card); box-shadow: 0 6px 20px rgba(110,59,59,.15); margin-bottom: 8px; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--primary); margin-bottom: 2px; }
+    .subtitle { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .status-pill { display: inline-block; background: var(--primary-light); color: var(--primary); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 20px; }
+    .container { max-width: 480px; margin: 0 auto; padding: 0 18px; }
+    .tabs-wrap { position: sticky; top: 0; z-index: 5; background: var(--bg); margin: 0 -18px; padding: 0 18px; border-bottom: 1px solid var(--line); }
+    .tabs-wrap::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 36px; background: linear-gradient(90deg, transparent, var(--bg)); pointer-events: none; }
+    .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 10px 30px 10px 0; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab-btn { border: 1px solid var(--line); background: var(--card); color: var(--muted); padding: 9px 16px; border-radius: 20px; font: 500 13px 'Inter', sans-serif; cursor: pointer; white-space: nowrap; }
+    .tab-btn.active { background: var(--primary); color: var(--bg); border-color: var(--primary); }
+    .btn-add, .btn-cta { display: block; width: 100%; text-align: center; background: var(--primary); color: var(--bg); text-decoration: none; font: 600 14px 'Inter', sans-serif; padding: 12px; border-radius: 12px; border: 0; cursor: pointer; }
+    .stepper { display: flex; align-items: center; justify-content: space-between; border: 1.5px solid var(--primary); border-radius: 12px; padding: 4px; }
+    .stepper button { width: 40px; height: 36px; border: 0; border-radius: 9px; background: var(--primary-light); color: var(--primary); font: 600 20px 'Inter', sans-serif; cursor: pointer; }
+    .stepper span { font-weight: 600; font-size: 14px; color: var(--primary); }
+    .sec-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--primary); margin: 36px 0 12px; }
+    .quote { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; font-size: 13px; line-height: 1.5; }
+    .quote small { display: block; color: var(--muted); margin-top: 6px; }
+    details.faq { background: var(--card); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 8px; }
+    details.faq summary { cursor: pointer; padding: 14px 16px; font-size: 14px; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary::after { content: "+"; color: var(--primary); font-size: 18px; line-height: 1; }
+    details.faq[open] summary::after { content: "−"; }
+    details.faq p { padding: 0 16px 14px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .info { font-size: 13px; color: var(--muted); line-height: 1.8; }
+    .info a { color: var(--primary); font-weight: 600; }
+    footer { text-align: center; font-size: 12px; color: var(--muted); margin-top: 36px; }
+    footer a { color: var(--primary); font-weight: 600; }
+    .chips { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+    .chip { border: 1px solid var(--line); background: var(--card); color: var(--primary); padding: 8px 14px; border-radius: 20px; font: 600 12px 'Inter', sans-serif; text-decoration: none; cursor: pointer; }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px 10px; justify-content: center; align-items: center; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 14px; }
+    .item-card { background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--line); display: flex; flex-direction: column; cursor: pointer; }
+    .media { position: relative; }
+    .item-img { width: 100%; height: 120px; object-fit: cover; display: block; }
+    .add { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--primary); color: var(--bg); font: 600 20px/1 'Inter', sans-serif; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+    .media .add { position: absolute; right: 8px; bottom: 8px; }
+    .badge { position: absolute; top: 8px; left: 8px; background: var(--primary); color: var(--bg); font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 10px; }
+    .badge.static { position: static; display: inline-block; margin-top: 6px; }
+    .badge:empty { display: none; }
+    .item-body { padding: 10px 12px 12px; flex: 1; }
+    .item-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; line-height: 1.25; margin-bottom: 4px; }
+    .pr { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+    .item-price { font-size: 12px; font-weight: 600; color: var(--primary); }
+    .item-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
+    .prod-img { width: 100%; height: 220px; object-fit: cover; border-radius: 14px; margin-bottom: 14px; }
+    .row { display: flex; gap: 12px; padding: 9px 0; font-size: 14px; color: var(--text); }
+    .row span { width: 22px; text-align: center; flex: none; }
+    .sheet h2.sp { margin-top: 28px; }
+    .opt { display: block; font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+    .opt select, .f input, .f textarea { width: 100%; margin-top: 4px; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--text); font: 14px 'Inter', sans-serif; }
+    .pill-open { background: #E3F5EA; color: #17693A; }
+    .pill-closed { background: #FBE9E7; color: #8A2D22; }
+    .aviso { font-size: 12px; color: var(--muted); }
+    .sheet-bg { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: flex-end; justify-content: center; z-index: 20; }
+    .sheet-bg.show { display: flex; }
+    .sheet { background: var(--bg); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; border-radius: 20px 20px 0 0; padding: 20px 18px calc(20px + env(safe-area-inset-bottom, 0px)); }
+    .sheet h2 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 22px; margin-bottom: 12px; }
+    .line { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+    .line small { display: block; color: var(--muted); }
+    .line .stepper { width: 110px; padding: 2px; flex: none; }
+    .line .stepper button { width: 30px; height: 30px; font-size: 16px; }
+    .f { display: block; font-size: 12px; color: var(--muted); margin-top: 14px; }
+    .radios { display: flex; gap: 8px; margin-top: 6px; }
+    .radios label { flex: 1; border: 1px solid var(--line); border-radius: 10px; padding: 10px; text-align: center; font-size: 13px; color: var(--text); cursor: pointer; }
+    .radios input { display: none; }
+    .radios label:has(input:checked) { background: var(--primary); color: var(--bg); border-color: var(--primary); }
+    .total { display: flex; justify-content: space-between; font-weight: 600; margin: 16px 0 12px; }
+    .erro { color: #B3261E; font-size: 12px; margin-bottom: 8px; min-height: 16px; }
+    .close { float: right; border: 0; background: none; color: var(--muted); font-size: 24px; cursor: pointer; }
+    .cart-bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 18px calc(12px + env(safe-area-inset-bottom, 0px)); background: var(--bg); border-top: 1px solid var(--line); display: none; }
+    .cart-bar.show { display: block; }
+    .cart-bar .btn-cta { max-width: 444px; margin: 0 auto; }
+    .wa { background: #1FA855 !important; color: #fff !important; }
+  </style>
+</head>
+<body>
+  <!-- ===== CONFIGURAÇÃO: edite só esta parte para cada cliente ===== -->
+  <script>
+    const CONFIG = {
+      nome: "Maison Sucre",
+      descricao: "Confeitaria autoral com ingredientes belgas · Brasília/DF",
+      aviso: "Encomendas com 24h de antecedência",
+      antecedenciaDias: 1,                          // mínimo de dias até a entrega
+      funcionamento: { dias: [1,2,3,4,5,6], abre: 9, fecha: 18 },   // 0=dom ... 6=sáb
+      logo: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=300&q=80",
+      whatsapp: "5561999999999",          // número da loja (DDI + DDD + número)
+      instagram: "maisonsucre",
+      retirada: "Retirada em Brasília/DF · entrega sob consulta",
+      horario: "Seg a sáb, das 9h às 18h",
+      pagamento: "Pix, cartão de crédito e débito",
+      desenvolvedorInstagram: "marisabatier.co",   // crédito no rodapé
+      categorias: { bolos: "Bolos Festivos", bento: "Bento Cakes", presentes: "Caixas Presente" },
+      avaliacoes: [
+        { texto: "O bolo de pistache foi o sucesso da festa. Chegou lindo e no horário.", autor: "Camila R." },
+        { texto: "Pedi o bento cake de aniversário e a personalização ficou perfeita.", autor: "Lucas M." }
+      ],
+      // perguntas frequentes: edite, apague ou acrescente conforme a loja
+      faq: [
+        { p: "Com quanto tempo de antecedência preciso encomendar?", r: "Com no mínimo 24 horas. Para bolos grandes, festas e datas como Dia das Mães e Natal, peça com mais antecedência, pois a agenda enche rápido." },
+        { p: "Preciso pagar sinal para reservar a data?", r: "Sim. Pedimos 50% do valor via Pix para confirmar a encomenda, e o restante na retirada ou entrega." },
+        { p: "Vocês entregam? Qual o valor?", r: "Entregamos em algumas regiões. O valor depende do endereço e é combinado no WhatsApp. Também é possível retirar no local." },
+        { p: "Posso personalizar o bolo?", r: "Sim. Informe no campo de observações a frase, as cores ou o tema. Desenhos mais elaborados podem ter valor adicional, combinado antes de fechar." },
+        { p: "Como conservar o bolo até a festa?", r: "Mantenha na geladeira e retire cerca de 30 minutos antes de servir. Consuma em até 3 dias." },
+        { p: "Vocês têm opções para alergias ou restrições?", r: "Fale com a gente antes de pedir. Informe a restrição nas observações para avaliarmos o que é possível. Nossa cozinha manipula leite, ovos, glúten e castanhas." },
+        { p: "Posso alterar ou cancelar o pedido?", r: "Alterações são aceitas até 48 horas antes da data. Cancelamentos com menos de 48 horas podem ter o sinal retido, pois os ingredientes já foram separados." }
+      ],
+      // foto: deixe "" para mostrar o espaço com emoji até você ter a foto real
+      produtos: [
+        { cat: "bolos", nome: "Berry & Pistache", preco: 195, emoji: "🍰", opcoes: [{ nome: "Tamanho", itens: [["P · 8 fatias", -60], ["M · 15 fatias", 0], ["G · 25 fatias", 90]] }], foto: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80", desc: "Massa chiffon de baunilha, duplo recheio de brigadeiro de pistache iraniano e geleia artesanal de framboesa. Serve 15 fatias no tamanho M." },
+        { cat: "bolos", nome: "Naked Cake de Frutas Vermelhas", preco: 210, emoji: "🍓", opcoes: [{ nome: "Tamanho", itens: [["P · 8 fatias", -60], ["M · 15 fatias", 0], ["G · 25 fatias", 90]] }], foto: "https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=600&q=80", desc: "Massa amanteigada, creme de baunilha e morangos, framboesas e mirtilos frescos. Serve 15 fatias." },
+        { cat: "bolos", nome: "Chocolate Belga Drip", preco: 185, emoji: "🍫", opcoes: [{ nome: "Tamanho", itens: [["P · 8 fatias", -60], ["M · 15 fatias", 0], ["G · 25 fatias", 90]] }], foto: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80", desc: "Massa de chocolate, ganache de chocolate belga 54% e cobertura drip. Serve 12 fatias." },
+        { cat: "bento", nome: "Bento Cake Personalizado", preco: 68, emoji: "🎂", opcoes: [{ nome: "Sabor", itens: [["Ninho com Morango", 0], ["Chocolate Belga", 0]] }], foto: "", desc: "Mini bolo de 450g com frase ou desenho personalizado. Sabores: Ninho com Morango ou Chocolate Belga." },
+        { cat: "presentes", nome: "Trufas de Chocolate Belga (12 un.)", preco: 78, emoji: "🍫", foto: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=600&q=80", desc: "Trufas artesanais cobertas com chocolate belga e finalizadas com cacau." },
+        { cat: "presentes", nome: "Box Degustação 16 Doces Finos", preco: 92, emoji: "🎁", foto: "", desc: "Caixa rígida com laço de cetim e 16 brigadeiros gourmet: Brûlée, Pistache, Belga 70% e Caramelo Salgado." }
+      ]
+    };
+  </script>
+
+  <div class="header">
+    <img id="logo" class="logo" alt="">
+    <h1 id="nome"></h1>
+    <p class="subtitle" id="descricao"></p>
+    <div class="meta"><span class="status-pill" id="status"></span><span class="aviso" id="aviso"></span></div>
+    <div class="chips">
+      <button class="chip" data-info="comoTitle">Como pedir</button>
+      <button class="chip" data-info="faqTitle">Dúvidas</button>
+      <a class="chip" id="igChip" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="tabs-wrap"><div class="tabs" id="tabs"></div></div>
+    <div class="grid" id="catalog"></div>
+
+    <h2 class="sec-title">Quem já pediu</h2>
+    <div id="avaliacoes"></div>
+
+    <footer>Desenvolvido por <a id="credito" target="_blank" rel="noopener"></a></footer>
+  </div>
+
+  <div class="cart-bar" id="cartBar">
+    <button class="btn-cta" id="cartBtn"></button>
+  </div>
+
+  <div class="sheet-bg" id="prodBg">
+    <div class="sheet" role="dialog" aria-label="Produto">
+      <button class="close" id="prodClose" aria-label="Fechar">×</button>
+      <div id="prodBody"></div>
+    </div>
+  </div>
+
+  <div class="sheet-bg" id="infoBg">
+    <div class="sheet" role="dialog" aria-label="Como pedir e dúvidas">
+      <button class="close" id="infoClose" aria-label="Fechar">×</button>
+      <h2 id="comoTitle">Como pedir</h2>
+      <div class="info" id="info"></div>
+      <h2 class="sp" id="faqTitle">Perguntas frequentes</h2>
+      <div id="faq"></div>
+    </div>
+  </div>
+
+  <div class="sheet-bg" id="sheetBg">
+    <div class="sheet" role="dialog" aria-label="Seu pedido">
+      <button class="close" id="closeBtn" aria-label="Fechar">×</button>
+      <h2>Seu pedido</h2>
+      <div id="lines"></div>
+      <div class="total"><span>Total</span><span id="total"></span></div>
+      <div class="radios">
+        <label><input type="radio" name="ent" value="Retirada" checked>Retirada</label>
+        <label><input type="radio" name="ent" value="Entrega">Entrega</label>
+      </div>
+      <label class="f" id="endWrap" style="display:none">Endereço de entrega<input id="end" type="text" placeholder="Rua, número, bairro"></label>
+      <label class="f">Data desejada<input id="data" type="date"></label>
+      <label class="f">Observações (frase no bolo, alergias, recados)<textarea id="obs" rows="3"></textarea></label>
+      <p class="erro" id="erro"></p>
+      <a class="btn-cta wa" id="sendBtn" target="_blank" rel="noopener">Enviar pedido pelo WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    const C = CONFIG;
+    const $ = id => document.getElementById(id);
+    const brl = n => 'R$ ' + n.toLocaleString('pt-BR');
+    const wa = (num, txt) => 'https://wa.me/' + num + '?text=' + encodeURIComponent(txt);
+    const F = C.funcionamento, DIAS = ['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+    let lines = [];   // {i, opts:[idx...], q}
+
+    $('logo').src = C.logo; $('logo').alt = C.nome;
+    $('nome').textContent = C.nome;
+    $('descricao').textContent = C.descricao;
+    $('aviso').textContent = C.aviso;
+    $('credito').textContent = '@' + C.desenvolvedorInstagram;
+    $('credito').href = 'https://instagram.com/' + C.desenvolvedorInstagram;
+    const row = (i, t) => '<div class="row"><span>' + i + '</span><div>' + t + '</div></div>';
+    $('info').innerHTML = row('🛒', 'Escolha os itens e toque em <b>Ver pedido</b>') + row('📅', 'Informe a data e a entrega e envie pelo WhatsApp') + row('💬', 'Confirmamos valor e detalhes com você') + row('🕒', C.horario) + row('📍', C.retirada) + row('💳', C.pagamento) + row('📷', '<a href="https://instagram.com/' + C.instagram + '" target="_blank" rel="noopener">@' + C.instagram + '</a>');
+    $('faq').innerHTML = C.faq.map(f => '<details class="faq"><summary>' + f.p + '</summary><p>' + f.r + '</p></details>').join('');
+    $('avaliacoes').innerHTML = C.avaliacoes.map(a => '<div class="quote">“' + a.texto + '”<small>' + a.autor + '</small></div>').join('');
+
+    // aberto agora / fechado
+    (function () {
+      const n = new Date(), d = n.getDay(), h = n.getHours(), el = $('status');
+      if (F.dias.includes(d) && h >= F.abre && h < F.fecha) {
+        el.textContent = 'Aberto agora · fecha às ' + F.fecha + 'h'; el.className = 'status-pill pill-open'; return;
+      }
+      let txt = '';
+      if (F.dias.includes(d) && h < F.abre) txt = 'abre hoje às ' + F.abre + 'h';
+      else for (let k = 1; k <= 7; k++) { const x = (d + k) % 7; if (F.dias.includes(x)) { txt = 'abre ' + (k === 1 ? 'amanhã' : DIAS[x]) + ' às ' + F.abre + 'h'; break; } }
+      el.textContent = 'Fechado · ' + txt; el.className = 'status-pill pill-closed';
+    })();
+
+    // abas
+    const cats = { todos: 'Todos', ...C.categorias };
+    $('tabs').innerHTML = Object.entries(cats).map(([k, v], i) => '<button class="tab-btn' + (i ? '' : ' active') + '" data-cat="' + k + '">' + v + '</button>').join('');
+    $('tabs').addEventListener('click', e => {
+      const b = e.target.closest('.tab-btn'); if (!b) return;
+      document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      document.querySelectorAll('.item-card').forEach(c => { c.style.display = (b.dataset.cat === 'todos' || c.dataset.cat === b.dataset.cat) ? 'flex' : 'none'; });
+    });
+
+    // produtos
+    const price = (p, opts) => p.preco + (p.opcoes || []).reduce((t, o, k) => t + o.itens[opts[k] || 0][1], 0);
+    const optText = (p, opts) => (p.opcoes || []).map((o, k) => o.itens[opts[k] || 0][0]).join(' · ');
+    const minPrice = p => p.preco + (p.opcoes || []).reduce((t, o) => t + Math.min(...o.itens.map(x => x[1])), 0);
+    $('catalog').innerHTML = C.produtos.map((p, i) => {
+      const add = '<button class="add" data-add aria-label="Adicionar ' + p.nome + '">+</button>';
+      const top = p.foto ? '<div class="media"><img class="item-img" src="' + p.foto + '" alt="' + p.nome + '" loading="lazy">' + add + '<span class="badge"></span></div>' : '';
+      return '<div class="item-card" data-cat="' + p.cat + '" data-i="' + i + '" tabindex="0">' + top +
+        '<div class="item-body"><h3 class="item-title">' + p.nome + '</h3><div class="pr"><span class="item-price">' + (p.opcoes ? 'a partir de ' : '') + brl(minPrice(p)) + '</span>' + (p.foto ? '' : add) + '</div>' + (p.foto ? '' : '<span class="badge static"></span>') + '</div></div>';
+    }).join('');
+
+    function addLine(i, opts) {
+      const key = i + '|' + opts.join(','), ex = lines.find(l => l.key === key);
+      if (ex) ex.q++; else lines.push({ key, i, opts, q: 1 });
+      render();
+    }
+    function openProd(i) {
+      const p = C.produtos[i];
+      const sel = (p.opcoes || []).map((o, k) => '<label class="opt">' + o.nome + '<select data-k="' + k + '">' + o.itens.map((it, m) => '<option value="' + m + '">' + it[0] + (it[1] ? ' (' + (it[1] > 0 ? '+' : '−') + brl(Math.abs(it[1])) + ')' : '') + '</option>').join('') + '</select></label>').join('');
+      $('prodBody').innerHTML = (p.foto ? '<img class="prod-img" src="' + p.foto + '" alt="' + p.nome + '">' : '') + '<h2>' + p.nome + '</h2><p class="item-desc">' + p.desc + '</p>' + sel + '<button class="btn-add" id="prodAdd"></button>';
+      const upd = () => { const o = [...$('prodBody').querySelectorAll('select')].map(x => +x.value); $('prodAdd').textContent = 'Adicionar ao pedido · ' + brl(price(p, o)); return o; };
+      $('prodBody').querySelectorAll('select').forEach(x => x.onchange = upd); upd();
+      $('prodAdd').onclick = () => { addLine(i, upd()); closeSheet(); };
+      $('prodBg').classList.add('show');
+    }
+    $('catalog').addEventListener('click', e => {
+      const card = e.target.closest('.item-card'); if (!card) return;
+      const i = +card.dataset.i;
+      if (e.target.closest('[data-add]') && !C.produtos[i].opcoes) addLine(i, []); else openProd(i);
+    });
+    $('catalog').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.classList.contains('item-card')) openProd(+e.target.dataset.i); });
+
+    // pedido
+    const total = () => lines.reduce((s, l) => s + l.q * price(C.produtos[l.i], l.opts), 0);
+    function render() {
+      const n = lines.reduce((s, l) => s + l.q, 0);
+      $('cartBar').classList.toggle('show', n > 0);
+      $('cartBtn').textContent = 'Ver pedido (' + n + (n > 1 ? ' itens' : ' item') + ' · ' + brl(total()) + ')';
+      document.querySelectorAll('.item-card').forEach(c => {
+        const q = lines.filter(l => l.i === +c.dataset.i).reduce((s, l) => s + l.q, 0);
+        c.querySelector('.badge').textContent = q ? q + ' no pedido' : '';
+      });
+      $('lines').innerHTML = lines.map((l, k) => { const p = C.produtos[l.i]; return '<div class="line"><div><b>' + p.nome + '</b><small>' + optText(p, l.opts) + ' · ' + brl(price(p, l.opts)) + '</small></div><div class="stepper" data-k="' + k + '"><button data-d="-1" aria-label="Remover um">−</button><span>' + l.q + '</span><button data-d="1" aria-label="Adicionar um">+</button></div></div>'; }).join('');
+      $('total').textContent = brl(total());
+      if (!n) closeSheet();
+    }
+    $('lines').addEventListener('click', e => {
+      const b = e.target.closest('[data-d]'); if (!b) return;
+      const k = +b.parentNode.dataset.k; lines[k].q += +b.dataset.d;
+      lines = lines.filter(l => l.q > 0); render();
+    });
+
+    const closeSheet = () => ['sheetBg', 'infoBg', 'prodBg'].forEach(id => $(id).classList.remove('show'));
+    $('prodClose').onclick = closeSheet;
+    $('prodBg').addEventListener('click', e => { if (e.target.id === 'prodBg') closeSheet(); });
+    $('igChip').href = 'https://instagram.com/' + C.instagram;
+    document.querySelectorAll('[data-info]').forEach(b => b.onclick = () => { $('infoBg').classList.add('show'); $(b.dataset.info).scrollIntoView(); });
+    $('infoClose').onclick = closeSheet;
+    $('infoBg').addEventListener('click', e => { if (e.target.id === 'infoBg') closeSheet(); });
+    $('cartBtn').onclick = () => $('sheetBg').classList.add('show');
+    $('closeBtn').onclick = closeSheet;
+    $('sheetBg').addEventListener('click', e => { if (e.target.id === 'sheetBg') closeSheet(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+
+    const entrega = () => document.querySelector('input[name=ent]:checked').value;
+    document.querySelectorAll('input[name=ent]').forEach(r => r.onchange = () => { $('endWrap').style.display = entrega() === 'Entrega' ? 'block' : 'none'; });
+
+    const pad = n => String(n).padStart(2, '0');
+    const min = new Date(); min.setDate(min.getDate() + C.antecedenciaDias);
+    $('data').min = min.getFullYear() + '-' + pad(min.getMonth() + 1) + '-' + pad(min.getDate());
+
+    $('sendBtn').addEventListener('click', e => {
+      let err = '';
+      const v = $('data').value;
+      if (!v) err = 'Escolha a data desejada.';
+      else {
+        const dt = new Date(v + 'T12:00:00');
+        if (dt < new Date($('data').min + 'T00:00:00')) err = 'Data muito próxima. ' + C.aviso + '.';
+        else if (!F.dias.includes(dt.getDay())) err = 'Não atendemos neste dia da semana. Escolha outra data.';
+      }
+      if (!err && entrega() === 'Entrega' && !$('end').value.trim()) err = 'Informe o endereço de entrega.';
+      $('erro').textContent = err;
+      if (err) { e.preventDefault(); return; }
+      const linhas = lines.map(l => { const p = C.produtos[l.i], o = optText(p, l.opts); return '• ' + l.q + 'x *' + p.nome + '*' + (o ? ' – ' + o : '') + ' (' + brl(price(p, l.opts)) + ')'; }).join('\n');
+      const [a, m, d] = v.split('-');
+      let msg = 'Olá! Vi o catálogo digital e quero fazer uma encomenda:\n\n' + linhas + '\n\nTotal: ' + brl(total()) + '\nData: ' + d + '/' + m + '/' + a + '\n' + (entrega() === 'Entrega' ? 'Entrega em: ' + $('end').value.trim() : 'Retirada no local');
+      if ($('obs').value.trim()) msg += '\nObservações: ' + $('obs').value.trim();
+      $('sendBtn').href = wa(C.whatsapp, msg);
+    });
+  </script>
+</body>
+</html>
